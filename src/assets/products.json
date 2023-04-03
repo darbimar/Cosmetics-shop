@@ -1,0 +1,115 @@
+[
+    {
+        "id": 0,
+        "image": "https://avatars.mds.yandex.net/get-mpic/3694390/img_id2249327847687111241.jpeg/orig",
+        "title": "Dr.Jart+ Увлажняющая маска с гиалуроновой кислотой",
+        "sizes": [
+            1,
+            5
+        ],
+        "price": 249,
+        "category": 0,
+        "rating": 4.8
+    },
+    {
+        "id": 1,
+        "image": "https://avatars.mds.yandex.net/get-mpic/3749045/img_id5341520270386812841.jpeg/orig",
+        "title": "Dr.Jart+ Увлажняющая маска Капсула Красоты с алоэ вера",
+        "sizes": [
+            1,
+            5
+        ],
+        "price": 249,
+        "category": 0,
+        "rating": 4.8
+    },
+    {
+        "id": 2,
+        "image": "https://avatars.mds.yandex.net/get-mpic/4343092/img_id2723610551705554836.jpeg/orig",
+        "title": "Dr.Jart+ Маска Альгинатный коктейль Лифтинг & Упругость",
+        "sizes": [
+            1
+        ],
+        "price": 610,
+        "category": 0,
+        "rating": 4.7
+    },
+    {
+        "id": 3,
+        "image": "https://avatars.mds.yandex.net/get-mpic/6240175/img_id5242549270938360068.jpeg/orig",
+        "title": "Dr.Jart+ Маска Альгинатный коктейль Увлажнение & Свежесть",
+        "sizes": [
+            1
+        ],
+        "price": 610,
+        "category": 0,
+        "rating": 4.7
+    },
+    {
+        "id": 4,
+        "image": "https://avatars.mds.yandex.net/get-mpic/6462174/img_id7582359753559282924.jpeg/orig",
+        "title": "Dr.Jart+ Cicapair Cream Восстанавливающий крем-антистресс для лица",
+        "sizes": [
+            1
+        ],
+        "price": 3990,
+        "category": 1,
+        "rating": 4.7
+    },
+    {
+        "id": 5,
+        "image": "https://avatars.mds.yandex.net/get-mpic/5219318/img_id4719669503892004927.jpeg/orig",
+        "title": "Dr.Jart+ Увлажняющий крем для глаз Vital Hydra Solution",
+        "sizes": [
+            1
+        ],
+        "price": 1818,
+        "category": 1,
+        "rating": 4.7
+    },
+    {
+        "id": 6,
+        "image": "https://avatars.mds.yandex.net/get-mpic/1970506/img_id4493032306871035322.jpeg/orig",
+        "title": "Dr.Jart+ Крем-мист для лица Ceramidin",
+        "sizes": [
+            1
+        ],
+        "price": 1390,
+        "category": 1,
+        "rating": 4.8
+    },
+    {
+        "id": 7,
+        "image": "https://avatars.mds.yandex.net/get-mpic/7179065/img_id5089460973348646276.jpeg/orig",
+        "title": "Dr.Jart+ Гель-пенка глубокого очищения для умывания Dermaclear Micro",
+        "sizes": [
+            1
+        ],
+        "price": 1300,
+        "category": 2,
+        "rating": 4.8
+    },
+    {
+        "id": 8,
+        "image": "https://avatars.mds.yandex.net/get-mpic/7179065/img_id6588623898172474191.jpeg/orig",
+        "title": "Dr.Jart+ Энзимная пенка для умывания",
+        "sizes": [
+            1
+        ],
+        "price": 2524,
+        "category": 2,
+        "rating": 4.8
+    },
+    {
+        "id": 9,
+        "image": "https://avatars.mds.yandex.net/get-mpic/2002045/img_id4141885408585880110.jpeg/orig",
+        "title": "Dr.Jart+ Cicapair Serum Сыворотка для лица",
+        "sizes": [
+            30,
+            50
+        ],
+        "price": 2770,
+        "category": 2,
+        "rating": 4.6
+    }
+]
