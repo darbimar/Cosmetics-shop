@@ -6,7 +6,7 @@ import ProductItem from './components/ProductItem';
 import products from './assets/products.json';
 
 
-console.log(products);
+fetch('https://642abe2500dfa3b5474dceb5.mockapi.io/products');
 
 function App() {
   return (
@@ -19,7 +19,7 @@ function App() {
             <Categories />
 
           </div>
-          <h2 className="content__title">Все пиццы</h2>
+          <h2 className="content__title">Вся косметика</h2>
           <div className="content__items">
             {
               products.map((obj) => (
