@@ -141,12 +141,17 @@ body {
     }
   }
 
+  .content__items {
+    display: block;
+  }
+
   &__item {
     display: flex;
     width: 100%;
     border-top: 1px solid $gray-line;
     padding-top: 30px;
     margin-top: 30px;
+    justify-content: space-around;
 
     &-img {
       display: flex;
@@ -202,7 +207,7 @@ body {
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 33%;
+      width: 10%;
 
       b {
         font-weight: bold;
