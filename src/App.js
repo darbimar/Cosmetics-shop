@@ -4,24 +4,31 @@ import './scss/app.scss';
 import NotFound from './pages/NotFound';
 import Bag from './components/Bag/Bag';
 import { Route, Routes } from 'react-router-dom';
+import { createContext, useState } from 'react';
 
+export const SearchContext = createContext('');
 
+console.log(SearchContext);
 
 function App() {
 
+  const [searchValue, setSearchValue] = useState('');
 
+  console.log(searchValue);
 
   return (
     <div className="wrapper">
-      <Header />
-      <div className="content">
-        <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='/not-found' element={<NotFound />} />
-          <Route path='/bag' element={<Bag />} />
-          <Route path='*' element={<Home />} />
-        </Routes>
-      </div>
+      <SearchContext.Provider value={{ searchValue, setSearchValue }}>
+        <Header />
+        <div className="content">
+          <Routes>
+            <Route path='/' element={<Home />} />
+            <Route path='/not-found' element={<NotFound />} />
+            <Route path='/bag' element={<Bag />} />
+            <Route path='*' element={<Home />} />
+          </Routes>
+        </div>
+      </SearchContext.Provider>
     </div>
 
   );

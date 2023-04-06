@@ -11,7 +11,10 @@ function Sort({ value, onClickSort }) {
     { name: 'алфавиту ↓', sortProperty: 'title', order: 'desc' },
   ];
 
-  console.log(value);
+  function onClickSortItem(i) {
+    onClickSort(i);
+    setSortShowed(false);
+  }
 
   return (
     <div className="sort">
@@ -36,7 +39,7 @@ function Sort({ value, onClickSort }) {
             {list.map((obj, id) => (
               <li
                 key={id}
-                onClick={() => onClickSort(obj)}
+                onClick={() => onClickSortItem(obj)}
                 className={value.name === obj.name ? 'active' : ''}>
                 {obj.name}
               </li>

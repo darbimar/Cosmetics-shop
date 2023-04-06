@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import logo from '../assets/img/logo.png';
+import Search from './Search';
 
 function Header() {
   return (
@@ -11,6 +12,7 @@ function Header() {
             <p>Not Medicine. It's Derma Cosmetics.</p>
           </div>
         </Link>
+        <Search />
         <div className="header__cart">
           <Link to="/bag" className="button button--cart">
             <span>498 ₽</span>
