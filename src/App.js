@@ -8,16 +8,14 @@ import { createContext, useState } from 'react';
 
 export const SearchContext = createContext('');
 
-console.log(SearchContext);
-
 function App() {
+
 
   const [searchValue, setSearchValue] = useState('');
 
-  console.log(searchValue);
-
   return (
     <div className="wrapper">
+
       <SearchContext.Provider value={{ searchValue, setSearchValue }}>
         <Header />
         <div className="content">
