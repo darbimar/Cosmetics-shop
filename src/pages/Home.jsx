@@ -1,9 +1,11 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { setCategoryId, setCurrentPage } from '../redux/slices/filterSlice';
+import { useNavigate } from 'react-router-dom';
+import { setCategoryId, setCurrentPage, setFilters } from '../redux/slices/filterSlice';
+import qs from 'qs';
 import axios from 'axios';
 import Categories from '../components/Categories';
-import Sort from '../components/Sort';
+import Sort, { list } from '../components/Sort';
 import ProductItem from '../components/ProductItem';
 import Skeleton from '../components/ProductItem/Skeleton';
 import '../scss/app.scss';
@@ -12,9 +14,10 @@ import { SearchContext } from '../App';
 
 function Home() {
   const { sort, categoryId, currentPage } = useSelector((state) => state.filter);
+  const navigate = useNavigate();
   const dispatch = useDispatch();
-
-  console.log(categoryId);
+  const isSearch = useRef(false);
+  const isMounted = useRef(false);
 
   const onClickCategory = (id) => {
     dispatch(setCategoryId(id));
@@ -28,7 +31,7 @@ function Home() {
   const [items, setItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
+  const fetchProducts = () => {
     setIsLoading(true);
     axios
       .get(
@@ -40,8 +43,47 @@ function Home() {
         setItems(res.data);
         setIsLoading(false);
       });
+  };
 
+  useEffect(() => {
     window.scrollTo(0, 0);
+    if (!isSearch.current) {
+      fetchProducts();
+    }
+    isSearch.current = false;
+  }, [categoryId, sort, currentPage]);
+
+  //Если изменили параметры
+  useEffect(() => {
+    if (window.location.search) {
+      const params = qs.parse(window.location.search.substring(1));
+      const sort = list.find(
+        (obj) => obj.sortProperty === params.sortProperty && obj.order === params.order,
+      );
+
+      dispatch(
+        setFilters({
+          ...params,
+          sort,
+        }),
+      );
+      isSearch.current = true;
+    }
+  }, []);
+
+  //Если был первый рендер, то проверяем URL-параметры и передаем в Redux
+  useEffect(() => {
+    if (isMounted.current) {
+      const queryString = qs.stringify({
+        sortProperty: sort.sortProperty,
+        order: sort.order,
+        categoryId,
+        currentPage,
+      });
+      navigate(`?${queryString}`);
+    }
+
+    isMounted.current = true;
   }, [categoryId, sort, currentPage]);
 
   const products = items
