@@ -45,14 +45,6 @@ function Home() {
       });
   };
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-    if (!isSearch.current) {
-      fetchProducts();
-    }
-    isSearch.current = false;
-  }, [categoryId, sort, currentPage]);
-
   //Если изменили параметры
   useEffect(() => {
     if (window.location.search) {
@@ -84,6 +76,14 @@ function Home() {
     }
 
     isMounted.current = true;
+  }, [categoryId, sort, currentPage]);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    if (!isSearch.current) {
+      fetchProducts();
+    }
+    isSearch.current = false;
   }, [categoryId, sort, currentPage]);
 
   const products = items
