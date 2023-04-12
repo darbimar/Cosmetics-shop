@@ -3,9 +3,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addItem } from '../../redux/slices/bagSlice';
 
 function ProductItem({ id, title, price, image, sizes }) {
-  const [productCount, setProductCount] = useState(0);
+  const item = useSelector((state) => state.bag.items.find((obj) => obj.id === id));
   const [activeType, setActiveType] = useState(0);
   const dispatch = useDispatch();
+
+  const addedCount = item ? item.count : 0;
 
   const onClickAdd = () => {
     const item = {
@@ -50,7 +52,7 @@ function ProductItem({ id, title, price, image, sizes }) {
               />
             </svg>
             <span>Добавить</span>
-            <i>{productCount}</i>
+            {addedCount > 0 && <i>{addedCount}</i>}
           </button>
         </div>
       </div>
