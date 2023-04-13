@@ -5,7 +5,7 @@ import BagItem from '../BagItem';
 import { clearItems } from '../../redux/slices/bagSlice';
 import BagEmpty from '../BagEmpty';
 
-function Bag({ id }) {
+function Bag({}) {
   const dispatch = useDispatch();
   const { totalPrice, items } = useSelector((state) => state.bag);
 
@@ -98,7 +98,7 @@ function Bag({ id }) {
         </div>
         <div className="content__items">
           {items.map((item) => (
-            <BagItem key={item.id} {...item} />
+            <BagItem key={item.id + item.sizes} {...item} />
           ))}
         </div>
         <div className="cart__bottom">

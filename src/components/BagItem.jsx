@@ -5,16 +5,16 @@ function BagItem({ id, title, price, image, sizes, count }) {
   const dispatch = useDispatch();
 
   const onClickPlus = () => {
-    dispatch(addItem({ id }));
+    dispatch(addItem({ id, sizes }));
   };
 
   const onClickMinus = () => {
-    dispatch(minusItem(id));
+    dispatch(minusItem({ id, sizes }));
   };
 
   const onDelete = () => {
     if (window.confirm('Вы уверены, что хотите удалить товар?')) {
-      dispatch(removeItem(id));
+      dispatch(removeItem({ id, sizes }));
     }
   };
 
@@ -25,7 +25,9 @@ function BagItem({ id, title, price, image, sizes, count }) {
       </div>
       <div className="cart__item-info">
         <h3>{title}</h3>
-        <p>{sizes}</p>
+        <p>
+          {sizes} {sizes > 5 ? 'мл' : 'шт'}
+        </p>
       </div>
       <div className="cart__item-count">
         <button

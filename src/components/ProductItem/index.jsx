@@ -15,7 +15,7 @@ function ProductItem({ id, title, price, image, sizes }) {
       title,
       price,
       image,
-      type: activeType,
+      sizes: sizes[activeType],
     };
     dispatch(addItem(item));
   };
@@ -32,7 +32,7 @@ function ProductItem({ id, title, price, image, sizes }) {
                 key={id}
                 onClick={() => setActiveType(id)}
                 className={activeType === id ? 'active' : ''}>
-                {elem} шт
+                {elem} {elem > 5 ? 'мл' : 'шт'}
               </li>
             ))}
           </ul>
