@@ -2,6 +2,7 @@ import { useContext, useEffect, useRef, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { setCategoryId, setCurrentPage, setFilters } from '../redux/slices/filterSlice';
+import { fetchProducts } from '../redux/slices/productsSlice';
 import qs from 'qs';
 import axios from 'axios';
 import Categories from '../components/Categories';
@@ -11,9 +12,11 @@ import Skeleton from '../components/ProductItem/Skeleton';
 import '../scss/app.scss';
 import Pagination from '../components/Pagination';
 import { SearchContext } from '../App';
+import NotFound from './NotFound';
 
 function Home() {
   const { sort, categoryId, currentPage } = useSelector((state) => state.filter);
+  const { items, status } = useSelector((state) => state.product);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const isSearch = useRef(false);
@@ -28,21 +31,9 @@ function Home() {
   };
 
   const { searchValue } = useContext(SearchContext);
-  const [items, setItems] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
 
-  const fetchProducts = () => {
-    setIsLoading(true);
-    axios
-      .get(
-        `https://642abe2500dfa3b5474dceb5.mockapi.io/products?page=${currentPage}&limit=3&${
-          categoryId > 0 ? `category=${categoryId}` : ''
-        }&sortBy=${sort.sortProperty}&order=${sort.order}`,
-      )
-      .then((res) => {
-        setItems(res.data);
-        setIsLoading(false);
-      });
+  const getProducts = async () => {
+    dispatch(fetchProducts({ sort, categoryId, currentPage }));
   };
 
   //Если изменили параметры
@@ -81,7 +72,7 @@ function Home() {
   useEffect(() => {
     window.scrollTo(0, 0);
     if (!isSearch.current) {
-      fetchProducts();
+      getProducts();
     }
     isSearch.current = false;
   }, [categoryId, sort, currentPage]);
@@ -98,8 +89,19 @@ function Home() {
         <Categories value={categoryId} onClickCategory={(id) => onClickCategory(id)} />
       </div>
       <h2 className="content__title">Вся косметика</h2>
-      <div className="content__items">{isLoading ? skeleton : products}</div>
-      <Pagination currentPage={currentPage} onChangePage={onChangePage} />
+      {status === 'error' ? (
+        <div className="content__error-info">
+          <h2>Произошла ошибка :(</h2>
+          <p>
+            К сожалению, не удалось загрузить продукты. <br /> Попробуйте попытку позднее.
+          </p>
+        </div>
+      ) : (
+        <>
+          <div className="content__items">{status === 'loading' ? skeleton : products}</div>
+          <Pagination currentPage={currentPage} onChangePage={onChangePage} />
+        </>
+      )}
     </div>
   );
 }
