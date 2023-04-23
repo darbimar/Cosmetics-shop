@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addItem } from '../../redux/slices/bagSlice';
+import { addItem, selectBagItemById } from '../../redux/slices/bagSlice';
 
 function ProductItem({ id, title, price, image, sizes }) {
-  const item = useSelector((state) => state.bag.items.find((obj) => obj.id === id));
+  const item = useSelector(selectBagItemById(id));
   const [activeType, setActiveType] = useState(0);
   const dispatch = useDispatch();
 

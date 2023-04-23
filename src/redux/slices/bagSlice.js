@@ -37,6 +37,9 @@ const bagSlice = createSlice({
     }
 })
 
+export const selectBag = (state) => state.bag;
+export const selectBagItemById = (id) => (state) => state.bag.items.find((obj) => obj.id === id);
+
 export const { addItem, removeItem, clearItems, minusItem } = bagSlice.actions;
 
 export default bagSlice.reducer;

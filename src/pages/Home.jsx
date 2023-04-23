@@ -1,10 +1,9 @@
-import { useContext, useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { setCategoryId, setCurrentPage, setFilters } from '../redux/slices/filterSlice';
 import { fetchProducts } from '../redux/slices/productsSlice';
 import qs from 'qs';
-import axios from 'axios';
 import Categories from '../components/Categories';
 import Sort, { list } from '../components/Sort';
 import ProductItem from '../components/ProductItem';
@@ -15,7 +14,7 @@ import { SearchContext } from '../App';
 import NotFound from './NotFound';
 
 function Home() {
-  const { sort, categoryId, currentPage } = useSelector((state) => state.filter);
+  const { sort, categoryId, currentPage, searchValue } = useSelector((state) => state.filter);
   const { items, status } = useSelector((state) => state.product);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -29,8 +28,6 @@ function Home() {
   const onChangePage = (number) => {
     dispatch(setCurrentPage(number));
   };
-
-  const { searchValue } = useContext(SearchContext);
 
   const getProducts = async () => {
     dispatch(fetchProducts({ sort, categoryId, currentPage }));
@@ -82,6 +79,7 @@ function Home() {
     .map((obj) => <ProductItem key={obj.id} {...obj} />);
   const skeleton = [...new Array(6)].map((_, index) => <Skeleton key={index} />);
 
+  console.log(products);
   return (
     <div className="container">
       <div className="content__top">
@@ -96,9 +94,14 @@ function Home() {
             К сожалению, не удалось загрузить продукты. <br /> Попробуйте попытку позднее.
           </p>
         </div>
-      ) : (
+      ) : status === 'success' ? (
         <>
           <div className="content__items">{status === 'loading' ? skeleton : products}</div>
+          <Pagination currentPage={currentPage} onChangePage={onChangePage} />
+        </>
+      ) : (
+        <>
+          <div className="content__items">{status === 'success' ? products : <NotFound />}</div>
           <Pagination currentPage={currentPage} onChangePage={onChangePage} />
         </>
       )}

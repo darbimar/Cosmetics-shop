@@ -2,12 +2,12 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import BagItem from '../BagItem';
-import { clearItems } from '../../redux/slices/bagSlice';
+import { clearItems, selectBag } from '../../redux/slices/bagSlice';
 import BagEmpty from '../BagEmpty';
 
 function Bag({}) {
   const dispatch = useDispatch();
-  const { totalPrice, items } = useSelector((state) => state.bag);
+  const { totalPrice, items } = useSelector(selectBag);
 
   const totalCount = items.reduce((sum, item) => sum + item.count, 0);
 
