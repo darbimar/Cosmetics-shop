@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addItem, selectBagItemById } from '../../redux/slices/bagSlice';
+import { Link } from 'react-router-dom';
 
 function ProductItem({ id, title, price, image, sizes }) {
   const item = useSelector(selectBagItemById(id));
@@ -23,8 +24,10 @@ function ProductItem({ id, title, price, image, sizes }) {
   return (
     <div className="product-block-wrapper">
       <div className="product-block">
-        <img className="product-block__image" src={image} alt="Product" />
-        <h4 className="product-block__title">{title}</h4>
+        <Link to={`/product/${id}`}>
+          <img className="product-block__image" src={image} alt="Product" />
+          <h4 className="product-block__title">{title}</h4>
+        </Link>
         <div className="product-block__selector">
           <ul>
             {sizes.map((elem, id) => (

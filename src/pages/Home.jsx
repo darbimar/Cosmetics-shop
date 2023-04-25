@@ -76,11 +76,7 @@ function Home() {
 
   const products = items
     .filter((obj) => obj.title.toLowerCase().includes(searchValue.toLowerCase()))
-    .map((obj) => (
-      <Link key={obj.id} to={`/product/${obj.id}`}>
-        <ProductItem {...obj} />
-      </Link>
-    ));
+    .map((obj) => <ProductItem key={obj.id} {...obj} />);
 
   const skeleton = [...new Array(6)].map((_, index) => <Skeleton key={index} />);
 
