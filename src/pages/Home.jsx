@@ -1,6 +1,6 @@
 import { useContext, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { setCategoryId, setCurrentPage, setFilters } from '../redux/slices/filterSlice';
 import { fetchProducts } from '../redux/slices/productsSlice';
 import qs from 'qs';
@@ -76,10 +76,14 @@ function Home() {
 
   const products = items
     .filter((obj) => obj.title.toLowerCase().includes(searchValue.toLowerCase()))
-    .map((obj) => <ProductItem key={obj.id} {...obj} />);
+    .map((obj) => (
+      <Link key={obj.id} to={`/product/${obj.id}`}>
+        <ProductItem {...obj} />
+      </Link>
+    ));
+
   const skeleton = [...new Array(6)].map((_, index) => <Skeleton key={index} />);
 
-  console.log(products);
   return (
     <div className="container">
       <div className="content__top">
@@ -94,14 +98,9 @@ function Home() {
             К сожалению, не удалось загрузить продукты. <br /> Попробуйте попытку позднее.
           </p>
         </div>
-      ) : status === 'success' ? (
-        <>
-          <div className="content__items">{status === 'loading' ? skeleton : products}</div>
-          <Pagination currentPage={currentPage} onChangePage={onChangePage} />
-        </>
       ) : (
         <>
-          <div className="content__items">{status === 'success' ? products : <NotFound />}</div>
+          <div className="content__items">{status === 'loading' ? skeleton : products}</div>
           <Pagination currentPage={currentPage} onChangePage={onChangePage} />
         </>
       )}

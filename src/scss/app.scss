@@ -363,3 +363,22 @@ body {
     }
   }
 }
+
+.single-item {
+  margin-left: 60px;
+  display: flex;
+  align-items: center;
+  gap: 40px;
+
+  &__image {
+    height: 300px;
+  }
+
+  &__text {
+    width: 600px;
+  }
+
+  p {
+    margin: 10px 0;
+  }
+}
