@@ -9,7 +9,13 @@ function BagItem({ id, title, price, image, sizes, count }) {
   };
 
   const onClickMinus = () => {
-    dispatch(minusItem({ id, sizes }));
+    if (count > 0) {
+      dispatch(minusItem({ id, sizes }));
+    }
+
+    if ((count = 0)) {
+      dispatch(removeItem({ id, sizes }));
+    }
   };
 
   const onDelete = () => {

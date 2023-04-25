@@ -2,8 +2,14 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-function SingleProduct() {
-  const [item, setItem] = useState();
+const SingleProduct: React.FC = () => {
+  const [item, setItem] = useState<{
+    image: string,
+    title: string,
+    description: string,
+    price: number
+
+  }>();
   const { id } = useParams();
 
   useEffect(() => {
@@ -21,7 +27,7 @@ function SingleProduct() {
   }, []);
 
   if (!item) {
-    return 'Загрузка...';
+    return <>Загрузка</>;
   }
 
   return (
@@ -34,6 +40,6 @@ function SingleProduct() {
       </div>
     </div>
   );
-}
+};
 
 export default SingleProduct;

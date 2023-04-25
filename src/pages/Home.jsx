@@ -1,6 +1,6 @@
-import { useContext, useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { setCategoryId, setCurrentPage, setFilters } from '../redux/slices/filterSlice';
 import { fetchProducts } from '../redux/slices/productsSlice';
 import qs from 'qs';
@@ -10,7 +10,6 @@ import ProductItem from '../components/ProductItem';
 import Skeleton from '../components/ProductItem/Skeleton';
 import '../scss/app.scss';
 import Pagination from '../components/Pagination';
-import { SearchContext } from '../App';
 import NotFound from './NotFound';
 
 function Home() {

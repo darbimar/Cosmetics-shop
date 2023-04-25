@@ -25,6 +25,8 @@ const bagSlice = createSlice({
             if (findItem) {
                 findItem.count--;
             }
+            state.items = state.items.filter((obj) => obj.count !== 0);
+            state.totalPrice = state.items.reduce((sum, obj) => obj.price * obj.count + sum, 0)
         },
 
         removeItem(state, action) {
