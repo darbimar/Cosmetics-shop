@@ -1,7 +1,11 @@
 import { useDispatch } from 'react-redux';
 import { addItem, minusItem, removeItem } from '../redux/slices/bagSlice';
 
-function BagItem({ id, title, price, image, sizes, count }) {
+type BagItemProps = {
+  id: string, title:string, price: number, image: string, sizes: number, count: number
+}
+
+const BagItem: React.FC<BagItemProps> = ({ id, title, price, image, sizes, count }) => {
   const dispatch = useDispatch();
 
   const onClickPlus = () => {

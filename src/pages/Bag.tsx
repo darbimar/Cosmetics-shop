@@ -1,15 +1,15 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import BagItem from '../BagItem';
-import { clearItems, selectBag } from '../../redux/slices/bagSlice';
-import BagEmpty from '../BagEmpty';
+import BagItem from '../components/BagItem';
+import { clearItems, selectBag } from '../redux/slices/bagSlice';
+import BagEmpty from '../components/BagEmpty';
 
-function Bag({}) {
+const Bag:React.FC = ({}) => {
   const dispatch = useDispatch();
   const { totalPrice, items } = useSelector(selectBag);
 
-  const totalCount = items.reduce((sum, item) => sum + item.count, 0);
+  const totalCount = items.reduce((sum: number, item: any) => sum + item.count, 0);
 
   const onCLear = () => {
     if (window.confirm('Вы уверены, что хотите очистить корзину?')) {
@@ -97,7 +97,7 @@ function Bag({}) {
           </div>
         </div>
         <div className="content__items">
-          {items.map((item) => (
+          {items.map((item: any) => (
             <BagItem key={item.id + item.sizes} {...item} />
           ))}
         </div>

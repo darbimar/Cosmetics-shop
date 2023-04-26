@@ -2,7 +2,7 @@ import Header from './components/Header';
 import Home from './pages/Home';
 import './scss/app.scss';
 import NotFound from './pages/NotFound';
-import Bag from './components/Bag/Bag';
+import Bag from './pages/Bag';
 import SingleProduct from './pages/SingleProduct';
 import { Route, Routes } from 'react-router-dom';
 import { createContext } from 'react';

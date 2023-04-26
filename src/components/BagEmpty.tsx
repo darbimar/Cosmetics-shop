@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import emptybag from '../assets/img/empty_bag.svg';
 
-function BagEmpty() {
+const BagEmpty = () => {
   return (
     <div className="cart cart--empty">
       <h3>

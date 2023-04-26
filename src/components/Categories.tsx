@@ -1,7 +1,11 @@
-import { useState } from 'react';
 
-function Categories({ value, onClickCategory }) {
-  const [activeIndex, setActiveIndex] = useState(0);
+type CategoriesProps = {
+  value: number;
+  onClickCategory: any
+}
+
+const Categories: React.FC<CategoriesProps> = ({ value, onClickCategory }) => {
+  
 
   const categories = ['Все', 'Маски', 'Крема', 'Пенки для очищения', 'Сыворотки'];
 

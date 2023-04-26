@@ -3,7 +3,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addItem, selectBagItemById } from '../../redux/slices/bagSlice';
 import { Link } from 'react-router-dom';
 
-function ProductItem({ id, title, price, image, sizes }) {
+type ProductItemProps = {
+  id: string, title:string, price: number, image: string, sizes: any
+}
+
+const ProductItem: React.FC<ProductItemProps>= ({ id, title, price, image, sizes }) => {
   const item = useSelector(selectBagItemById(id));
   const [activeType, setActiveType] = useState(0);
   const dispatch = useDispatch();
@@ -30,7 +34,7 @@ function ProductItem({ id, title, price, image, sizes }) {
         </Link>
         <div className="product-block__selector">
           <ul>
-            {sizes.map((elem, id) => (
+            {sizes.map((elem: number, id:any) => (
               <li
                 key={id}
                 onClick={() => setActiveType(id)}

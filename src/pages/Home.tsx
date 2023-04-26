@@ -11,25 +11,28 @@ import Skeleton from '../components/ProductItem/Skeleton';
 import '../scss/app.scss';
 import Pagination from '../components/Pagination';
 import NotFound from './NotFound';
+import { RootState } from '../redux/store';
 
-function Home() {
-  const { sort, categoryId, currentPage, searchValue } = useSelector((state) => state.filter);
-  const { items, status } = useSelector((state) => state.product);
+const Home = () => {
+  const { sort, categoryId, currentPage, searchValue } = useSelector((state: RootState) => state.filter);
+  const { items, status } = useSelector((state: RootState) => state.product);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const isSearch = useRef(false);
   const isMounted = useRef(false);
 
-  const onClickCategory = (id) => {
+  const onClickCategory = (id:number) => {
     dispatch(setCategoryId(id));
   };
 
-  const onChangePage = (number) => {
+  const onChangePage = (number: number) => {
     dispatch(setCurrentPage(number));
   };
 
   const getProducts = async () => {
-    dispatch(fetchProducts({ sort, categoryId, currentPage }));
+    dispatch(
+      // @ts-ignore
+      fetchProducts({ sort, categoryId, currentPage }));
   };
 
   //Если изменили параметры
@@ -83,7 +86,7 @@ function Home() {
     <div className="container">
       <div className="content__top">
         <Sort />
-        <Categories value={categoryId} onClickCategory={(id) => onClickCategory(id)} />
+        <Categories value={categoryId} onClickCategory={(id: number) => onClickCategory(id)} />
       </div>
       <h2 className="content__title">Вся косметика</h2>
       {status === 'error' ? (
