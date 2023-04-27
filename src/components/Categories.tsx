@@ -1,7 +1,7 @@
 
 type CategoriesProps = {
   value: number;
-  onClickCategory: any
+  onClickCategory: (i: number) => void
 }
 
 const Categories: React.FC<CategoriesProps> = ({ value, onClickCategory }) => {
