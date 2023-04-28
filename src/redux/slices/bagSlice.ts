@@ -1,6 +1,16 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { RootState } from "../store";
 
-const initialState = {
+export type BagItem = {
+    id: string, title:string, price: number, image: string, sizes: number, count: number
+  }
+
+interface BagSliceState {
+    totalPrice: number;
+    items: BagItem[]
+}
+
+const initialState:BagSliceState = {
     items: [],
     totalPrice: 0
 }
@@ -9,7 +19,7 @@ const bagSlice = createSlice({
     name: 'bag',
     initialState,
     reducers: {
-        addItem(state, action) {
+        addItem(state, action:PayloadAction<BagItem>) {
             const findItem = state.items.find((obj) => obj.id === action.payload.id && obj.sizes === action.payload.sizes);
 
             if (findItem) {
@@ -19,7 +29,7 @@ const bagSlice = createSlice({
             }
             state.totalPrice = state.items.reduce((sum, obj) => obj.price * obj.count + sum, 0)
         },
-        minusItem(state, action) {
+        minusItem(state, action: PayloadAction<BagItem>) {
             const findItem = state.items.find((obj) => obj.id === action.payload.id && obj.sizes === action.payload.sizes);
 
             if (findItem) {
@@ -29,8 +39,8 @@ const bagSlice = createSlice({
             state.totalPrice = state.items.reduce((sum, obj) => obj.price * obj.count + sum, 0)
         },
 
-        removeItem(state, action) {
-            state.items = state.items.filter(obj => obj.id !== action.payload && obj.sizes !== action.payload.sizes);
+        removeItem(state, action: PayloadAction<BagItem>) {
+            state.items = state.items.filter(obj => obj.id !== action.payload.id && obj.sizes !== action.payload.sizes);
         },
         clearItems(state) {
             state.items = [];
@@ -39,8 +49,8 @@ const bagSlice = createSlice({
     }
 })
 
-export const selectBag = (state) => state.bag;
-export const selectBagItemById = (id) => (state) => state.bag.items.find((obj) => obj.id === id);
+export const selectBag = (state: RootState) => state.bag;
+export const selectBagItemById = (id:string) => (state: RootState) => state.bag.items.find((obj) => obj.id === id);
 
 export const { addItem, removeItem, clearItems, minusItem } = bagSlice.actions;
 

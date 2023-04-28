@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { setCategoryId, setCurrentPage, setFilters } from '../redux/slices/filterSlice';
+import { FilterSliceState, setCategoryId, setCurrentPage, setFilters } from '../redux/slices/filterSlice';
 import { fetchProducts } from '../redux/slices/productsSlice';
 import qs from 'qs';
 import Categories from '../components/Categories';
@@ -11,13 +11,13 @@ import Skeleton from '../components/ProductItem/Skeleton';
 import '../scss/app.scss';
 import Pagination from '../components/Pagination';
 import NotFound from './NotFound';
-import { RootState } from '../redux/store';
+import { RootState, useAppDispatch } from '../redux/store';
 
 const Home = () => {
   const { sort, categoryId, currentPage, searchValue } = useSelector((state: RootState) => state.filter);
   const { items, status } = useSelector((state: RootState) => state.product);
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const isSearch = useRef(false);
   const isMounted = useRef(false);
 
@@ -31,7 +31,6 @@ const Home = () => {
 
   const getProducts = async () => {
     dispatch(
-      // @ts-ignore
       fetchProducts({ sort, categoryId, currentPage }));
   };
 

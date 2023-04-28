@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addItem, selectBagItemById } from '../../redux/slices/bagSlice';
+import { BagItem, addItem, selectBagItemById } from '../../redux/slices/bagSlice';
 import { Link } from 'react-router-dom';
 
 type ProductItemProps = {
-  id: string, title:string, price: number, image: string, sizes: any
+  id: string, title:string, price: number, image: string, sizes: number[]
 }
 
 const ProductItem: React.FC<ProductItemProps>= ({ id, title, price, image, sizes }) => {
@@ -15,12 +15,13 @@ const ProductItem: React.FC<ProductItemProps>= ({ id, title, price, image, sizes
   const addedCount = item ? item.count : 0;
 
   const onClickAdd = () => {
-    const item = {
+    const item: BagItem =  {
       id,
       title,
       price,
       image,
       sizes: sizes[activeType],
+      count: 0
     };
     dispatch(addItem(item));
   };
