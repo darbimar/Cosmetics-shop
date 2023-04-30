@@ -36,15 +36,16 @@ const bagSlice = createSlice({
                 findItem.count--;
             }
             state.items = state.items.filter((obj) => obj.count !== 0);
-            state.totalPrice = state.items.reduce((sum, obj) => obj.price * obj.count + sum, 0)
+            state.totalPrice = state.items.reduce((sum, obj) => obj.price * obj.count + sum, 0);
         },
 
         removeItem(state, action: PayloadAction<BagItem>) {
             state.items = state.items.filter(obj => obj.id !== action.payload.id && obj.size !== action.payload.size);
+            state.totalPrice = state.items.reduce((sum, obj) => obj.price * obj.count + sum, 0);
         },
         clearItems(state) {
             state.items = [];
-            state.totalPrice = 0
+            state.totalPrice = 0;
         }
     }
 })
