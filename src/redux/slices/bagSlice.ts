@@ -2,7 +2,7 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../store";
 
 export type BagItem = {
-    id: string, title:string, price: number, image: string, sizes: number, count: number
+    id: string, title:string, price: number, image: string, size: number, count: number
   }
 
 interface BagSliceState {
@@ -20,7 +20,7 @@ const bagSlice = createSlice({
     initialState,
     reducers: {
         addItem(state, action:PayloadAction<BagItem>) {
-            const findItem = state.items.find((obj) => obj.id === action.payload.id && obj.sizes === action.payload.sizes);
+            const findItem = state.items.find((obj) => obj.id === action.payload.id && obj.size === action.payload.size);
 
             if (findItem) {
                 findItem.count++;
@@ -30,7 +30,7 @@ const bagSlice = createSlice({
             state.totalPrice = state.items.reduce((sum, obj) => obj.price * obj.count + sum, 0)
         },
         minusItem(state, action: PayloadAction<BagItem>) {
-            const findItem = state.items.find((obj) => obj.id === action.payload.id && obj.sizes === action.payload.sizes);
+            const findItem = state.items.find((obj) => obj.id === action.payload.id && obj.size === action.payload.size);
 
             if (findItem) {
                 findItem.count--;
@@ -40,7 +40,7 @@ const bagSlice = createSlice({
         },
 
         removeItem(state, action: PayloadAction<BagItem>) {
-            state.items = state.items.filter(obj => obj.id !== action.payload.id && obj.sizes !== action.payload.sizes);
+            state.items = state.items.filter(obj => obj.id !== action.payload.id && obj.size !== action.payload.size);
         },
         clearItems(state) {
             state.items = [];

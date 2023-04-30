@@ -2,29 +2,29 @@ import { useDispatch } from 'react-redux';
 import { addItem, minusItem, removeItem } from '../redux/slices/bagSlice';
 
 type BagItemProps = {
-  id: string, title:string, price: number, image: string, sizes: number, count: number
+  id: string, title:string, price: number, image: string, size: number, count: number
 }
 
-const BagItem: React.FC<BagItemProps> = ({ id, title, price, image, sizes, count }) => {
+const BagItem: React.FC<BagItemProps> = ({ id, title, price, image, size, count }) => {
   const dispatch = useDispatch();
 
   const onClickPlus = () => {
-    dispatch(addItem({ id, sizes }));
+    dispatch(addItem({ id, size } as BagItemProps));
   };
 
   const onClickMinus = () => {
     if (count > 0) {
-      dispatch(minusItem({ id, sizes }));
+      dispatch(minusItem({ id, size } as BagItemProps));
     }
 
     if ((count = 0)) {
-      dispatch(removeItem({ id, sizes }));
+      dispatch(removeItem({ id, size } as BagItemProps));
     }
   };
 
   const onDelete = () => {
     if (window.confirm('Вы уверены, что хотите удалить товар?')) {
-      dispatch(removeItem({ id, sizes }));
+      dispatch(removeItem({ id, size } as BagItemProps));
     }
   };
 
@@ -36,7 +36,7 @@ const BagItem: React.FC<BagItemProps> = ({ id, title, price, image, sizes, count
       <div className="cart__item-info">
         <h3>{title}</h3>
         <p>
-          {sizes} {sizes > 5 ? 'мл' : 'шт'}
+          {size} {size > 5 ? 'мл' : 'шт'}
         </p>
       </div>
       <div className="cart__item-count">

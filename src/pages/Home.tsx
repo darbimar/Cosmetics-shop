@@ -1,11 +1,11 @@
 import { useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { FilterSliceState, setCategoryId, setCurrentPage, setFilters } from '../redux/slices/filterSlice';
+import { FilterSliceState,  setCategoryId, setCurrentPage, setFilters } from '../redux/slices/filterSlice';
 import { fetchProducts } from '../redux/slices/productsSlice';
 import qs from 'qs';
 import Categories from '../components/Categories';
-import Sort, { list } from '../components/Sort';
+import  Sort, { list } from '../components/Sort';
 import ProductItem from '../components/ProductItem';
 import Skeleton from '../components/ProductItem/Skeleton';
 import '../scss/app.scss';
@@ -37,15 +37,16 @@ const Home = () => {
   //Если изменили параметры
   useEffect(() => {
     if (window.location.search) {
-      const params = qs.parse(window.location.search.substring(1));
+      const params = (qs.parse(window.location.search.substring(1)) as unknown) as FilterSliceState;
       const sort = list.find(
-        (obj) => obj.sortProperty === params.sortProperty && obj.order === params.order,
+        (obj) => obj.sortProperty === params.sort.sortProperty && obj.order === params.sort.order,
       );
+
 
       dispatch(
         setFilters({
           ...params,
-          sort,
+          sort
         }),
       );
       isSearch.current = true;
@@ -77,7 +78,7 @@ const Home = () => {
 
   const products = items
     .filter((obj) => obj.title.toLowerCase().includes(searchValue.toLowerCase()))
-    .map((obj) => <ProductItem key={obj.id} {...obj} />);
+    .map((obj: any) => <ProductItem key={obj.id} {...obj} />);
 
   const skeleton = [...new Array(6)].map((_, index) => <Skeleton key={index} />);
 

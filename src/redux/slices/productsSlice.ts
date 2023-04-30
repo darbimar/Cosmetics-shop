@@ -9,6 +9,7 @@ type FetchProducts = {
     currentPage: number
 };
 
+
 export const fetchProducts = createAsyncThunk(
     'product/fetchProductsStatus',
     async (params: FetchProducts) => {
@@ -47,11 +48,11 @@ const productsSlice = createSlice({
         builder.addCase(fetchProducts.pending, (state) => {
             state.items = [];
             state.status = 'loading';
-        }),
+        });
         builder.addCase(fetchProducts.fulfilled, (state, action) => {
             state.items = action.payload;
             state.status = 'success';
-        }),
+        });
         builder.addCase(fetchProducts.rejected, (state) => {
             state.items = [];
             state.status = 'error';

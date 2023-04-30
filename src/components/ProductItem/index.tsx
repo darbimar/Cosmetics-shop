@@ -4,7 +4,7 @@ import { BagItem, addItem, selectBagItemById } from '../../redux/slices/bagSlice
 import { Link } from 'react-router-dom';
 
 type ProductItemProps = {
-  id: string, title:string, price: number, image: string, sizes: number[]
+  id: string, title: string, price: number, image: string, sizes: number[]
 }
 
 const ProductItem: React.FC<ProductItemProps>= ({ id, title, price, image, sizes }) => {
@@ -20,7 +20,7 @@ const ProductItem: React.FC<ProductItemProps>= ({ id, title, price, image, sizes
       title,
       price,
       image,
-      sizes: sizes[activeType],
+      size: sizes[activeType],
       count: 0
     };
     dispatch(addItem(item));

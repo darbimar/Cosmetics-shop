@@ -12,7 +12,7 @@ export interface FilterSliceState {
 }
 
 
-const initialState: FilterSliceState = {
+export const initialState: FilterSliceState = {
     searchValue: '',
     categoryId: 0,
     currentPage: 1,
