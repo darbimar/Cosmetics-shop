@@ -76,10 +76,12 @@ const Home = () => {
     isSearch.current = false;
   }, [categoryId, sort, currentPage]);
 
+  
+
   const products = items
     .filter((obj) => obj.title.toLowerCase().includes(searchValue.toLowerCase()))
     .map((obj: any) => <ProductItem key={obj.id} {...obj} />);
-
+    console.log(products);
   const skeleton = [...new Array(6)].map((_, index) => <Skeleton key={index} />);
 
   return (

@@ -3,12 +3,21 @@ import { useSelector } from 'react-redux';
 import logo from '../assets/img/logo.png';
 import Search from './Search';
 import { selectBag } from '../redux/slices/bagSlice';
+import { useEffect, useRef } from 'react';
 
 const Header = () => {
   const { items, totalPrice } = useSelector(selectBag);
   const { pathname } = useLocation();
-
   const totalCount = items.reduce((sum: number, item: any) => sum + item.count, 0);
+  const isMounted = useRef(false);
+
+  useEffect(() => {
+    if (isMounted) {
+      const json = JSON.stringify(items);
+      localStorage.setItem('cart', json);
+    }
+    isMounted.current = true;
+  },[items])
 
   return (
     <div className="header">
