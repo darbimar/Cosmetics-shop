@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { FilterSliceState,  setCategoryId, setCurrentPage, setFilters } from '../redux/slices/filterSlice';
+import { FilterSlice,  setCategoryId, setCurrentPage, setFilters } from '../redux/slices/filterSlice';
 import { fetchProducts } from '../redux/slices/productsSlice';
 import qs from 'qs';
 import Categories from '../components/Categories';
@@ -34,14 +34,14 @@ const Home = () => {
       fetchProducts({ sort, categoryId, currentPage }));
   };
 
-  //Если изменили параметры
+
+  // Если изменили параметры
   useEffect(() => {
     if (window.location.search) {
-      const params = (qs.parse(window.location.search.substring(1)) as unknown) as FilterSliceState;
+      const params = (qs.parse(window.location.search.substring(1)) as unknown) as FilterSlice;
       const sort = list.find(
-        (obj) => obj.sortProperty === params.sort.sortProperty && obj.order === params.sort.order,
+        (obj) => obj.sortProperty === params.sortProperty && obj.order === params.order,
       );
-
 
       dispatch(
         setFilters({
@@ -50,8 +50,11 @@ const Home = () => {
         }),
       );
       isSearch.current = true;
+      
     }
   }, []);
+
+  
 
   //Если был первый рендер, то проверяем URL-параметры и передаем в Redux
   useEffect(() => {
@@ -81,8 +84,10 @@ const Home = () => {
   const products = items
     .filter((obj) => obj.title.toLowerCase().includes(searchValue.toLowerCase()))
     .map((obj: any) => <ProductItem key={obj.id} {...obj} />);
-    console.log(products);
   const skeleton = [...new Array(6)].map((_, index) => <Skeleton key={index} />);
+
+
+  console.log(products);
 
   return (
     <div className="container">
@@ -90,7 +95,7 @@ const Home = () => {
         <Sort />
         <Categories value={categoryId} onClickCategory={(id: number) => onClickCategory(id)} />
       </div>
-      <h2 className="content__title">Вся косметика</h2>
+      <h2 className="content__title">Вся косметика</h2> 
       {status === 'error' ? (
         <div className="content__error-info">
           <h2>Произошла ошибка :(</h2>
@@ -99,9 +104,16 @@ const Home = () => {
           </p>
         </div>
       ) : (
-        <>
-          <div className="content__items">{status === 'loading' ? skeleton : products}</div>
-          <Pagination currentPage={currentPage} onChangePage={onChangePage} />
+        <> 
+          {status === 'loading' ? ( 
+            skeleton
+          ) : products.length > 0 ? (
+          <>
+            <div className="content__items">{status === 'loading' ? skeleton : products }</div>
+            <Pagination currentPage={currentPage} onChangePage={onChangePage} categoryId={categoryId}/>
+          </> 
+           ) : (<NotFound/> 
+          )}
         </>
       )}
     </div>

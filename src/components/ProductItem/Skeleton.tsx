@@ -1,7 +1,6 @@
-import React from "react"
 import ContentLoader from "react-content-loader"
 
-const Skeleton = (props) => (
+const Skeleton = (props: any) => (
   <ContentLoader 
     className="product-block"
     speed={0}

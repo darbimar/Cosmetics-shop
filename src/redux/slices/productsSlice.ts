@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import axios from 'axios';
 import { SortItem } from "../../components/Sort";
-import { BagItem } from "./bagSlice";
 
 type FetchProducts = {
     sort: SortItem,

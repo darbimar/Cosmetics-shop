@@ -4,13 +4,20 @@ type Sort = {
     name: string, sortProperty: string, order: string
 }
 
+export interface FilterSlice {
+    searchValue: string,
+    categoryId: number,
+    currentPage: number,
+    sortProperty: string,
+    order: string,
+}
+
 export interface FilterSliceState {
     searchValue: string,
     categoryId: number,
     currentPage: number,
     sort: Sort
 }
-
 
 export const initialState: FilterSliceState = {
     searchValue: '',
