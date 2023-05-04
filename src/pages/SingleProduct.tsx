@@ -7,7 +7,7 @@ const SingleProduct: React.FC = () => {
     image: string,
     title: string,
     description: string,
-    price: number
+    prices: number[]
 
   }>();
   const { id } = useParams();
@@ -36,7 +36,7 @@ const SingleProduct: React.FC = () => {
       <div className="single-item__text">
         <h2>{item.title}</h2>
         <p>{item.description}</p>
-        <h3>{item.price} руб.</h3>
+        <h3>{item.prices[0]} руб.</h3>
       </div>
     </div>
   );

@@ -24,7 +24,7 @@ const bagSlice = createSlice({
     initialState,
     reducers: {
         addItem(state, action:PayloadAction<BagItem>) {
-            const findItem = state.items.find((obj) => obj.id === action.payload.id && obj.size === action.payload.size);
+            const findItem = state.items.find((obj) => obj.id === action.payload.id );
 
             if (findItem) {
                 findItem.count++;

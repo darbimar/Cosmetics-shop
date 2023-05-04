@@ -98,7 +98,7 @@ const Bag:React.FC = ({}) => {
         </div>
         <div className="content__items">
           {items.map((item: any) => (
-            <BagItem key={item.id + item.sizes} {...item} />
+            <BagItem key={item.id + item.sizes + item.price} {...item} />
           ))}
         </div>
         <div className="cart__bottom">

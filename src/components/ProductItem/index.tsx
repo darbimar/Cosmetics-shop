@@ -1,30 +1,38 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { BagItem, addItem, selectBagItemById } from '../../redux/slices/bagSlice';
 import { Link } from 'react-router-dom';
 
 type ProductItemProps = {
-  id: string, title: string, price: number, image: string, sizes: number[]
+  id: string, title: string, prices: number[], image: string, sizes: number[]
 }
 
-const ProductItem: React.FC<ProductItemProps>= ({ id, title, price, image, sizes }) => {
+const ProductItem: React.FC<ProductItemProps>= ({ id, title, prices, image, sizes }) => {
   const item = useSelector(selectBagItemById(id));
   const [activeType, setActiveType] = useState(0);
+  const [actualPrice, setActualPrice] = useState(prices[0]);
   const dispatch = useDispatch();
 
   const addedCount = item ? item.count : 0;
+
 
   const onClickAdd = () => {
     const item: BagItem =  {
       id,
       title,
-      price,
+      price: prices[activeType],
       image,
       size: sizes[activeType],
       count: 0
     };
     dispatch(addItem(item));
   };
+
+  const onClickType = (id: number) => {
+    setActiveType(id);
+    setActualPrice(prices[id])
+  }
+
 
   return (
     <div className="product-block-wrapper">
@@ -38,7 +46,7 @@ const ProductItem: React.FC<ProductItemProps>= ({ id, title, price, image, sizes
             {sizes.map((elem: number, id:any) => (
               <li
                 key={id}
-                onClick={() => setActiveType(id)}
+                onClick={() => onClickType(id)}
                 className={activeType === id ? 'active' : ''}>
                 {elem} {elem > 5 ? 'мл' : 'шт'}
               </li>
@@ -46,7 +54,7 @@ const ProductItem: React.FC<ProductItemProps>= ({ id, title, price, image, sizes
           </ul>
         </div>
         <div className="product-block__bottom">
-          <div className="product-block__price">от {price} ₽</div>
+          <div className="product-block__price">от {actualPrice} ₽</div>
           <button className="button button--outline button--add" onClick={onClickAdd}>
             <svg
               width="12"

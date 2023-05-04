@@ -22,7 +22,7 @@ export const fetchProducts = createAsyncThunk(
 )
 
 type Product = {
-    id: string, title:string, price: number, image: string, sizes: number
+    id: string, title:string, prices: number[], image: string, sizes: number
 }
 
 interface ProductSliceState {
