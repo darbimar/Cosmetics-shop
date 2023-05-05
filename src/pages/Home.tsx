@@ -104,7 +104,7 @@ const Home = () => {
       ) : (
         <> 
           {status === 'loading' ? ( 
-            skeleton
+            <div className="content__items">{skeleton}</div>
           ) : products.length > 0 ? (
           <>
             <div className="content__items">{status === 'loading' ? skeleton : products }</div>

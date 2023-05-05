@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 const SingleProduct: React.FC = () => {
   const [item, setItem] = useState<{
@@ -38,6 +38,10 @@ const SingleProduct: React.FC = () => {
         <p>{item.description}</p>
         <h3>{item.prices[0]} руб.</h3>
       </div>
+      <Link to="/" className="button button--outline go-back-btn">
+
+        <span>Вернуться назад</span>
+      </Link>
     </div>
   );
 };

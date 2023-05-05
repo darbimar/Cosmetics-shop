@@ -2,7 +2,7 @@ import ContentLoader from "react-content-loader"
 
 const Skeleton = (props: any) => (
   <ContentLoader 
-    className="product-block"
+    className="container"
     speed={0}
     width={280}
     height={480}

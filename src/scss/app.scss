@@ -399,7 +399,7 @@ body {
   margin-left: 60px;
   display: flex;
   align-items: center;
-  gap: 40px;
+  justify-content: space-evenly;
 
   &__image {
     height: 300px;
