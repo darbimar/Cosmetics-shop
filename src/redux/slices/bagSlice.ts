@@ -8,7 +8,7 @@ export type BagItem = {
   }
 
 interface BagSliceState {
-    totalPrice: number;
+    totalPrice: number,
     items: BagItem[]
 }
 
@@ -24,14 +24,14 @@ const bagSlice = createSlice({
     initialState,
     reducers: {
         addItem(state, action:PayloadAction<BagItem>) {
-            const findItem = state.items.find((obj) => obj.id === action.payload.id );
+            const findItem = state.items.find((obj) => obj.id === action.payload.id && obj.size === action.payload.size);
 
             if (findItem) {
                 findItem.count++;
             } else {
                 state.items.push({ ...action.payload, count: 1 })
             }
-            state.totalPrice = state.items.reduce((sum, obj) => obj.price * obj.count + sum, 0)
+            state.totalPrice = calcTotalPrice(state.items);
         },
         minusItem(state, action: PayloadAction<BagItem>) {
             const findItem = state.items.find((obj) => obj.id === action.payload.id && obj.size === action.payload.size);

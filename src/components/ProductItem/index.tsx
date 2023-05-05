@@ -8,12 +8,10 @@ type ProductItemProps = {
 }
 
 const ProductItem: React.FC<ProductItemProps>= ({ id, title, prices, image, sizes }) => {
-  const item = useSelector(selectBagItemById(id));
   const [activeType, setActiveType] = useState(0);
   const [actualPrice, setActualPrice] = useState(prices[0]);
+  const [addedCount, setAddedCount] = useState(0);
   const dispatch = useDispatch();
-
-  const addedCount = item ? item.count : 0;
 
 
   const onClickAdd = () => {
@@ -26,6 +24,7 @@ const ProductItem: React.FC<ProductItemProps>= ({ id, title, prices, image, size
       count: 0
     };
     dispatch(addItem(item));
+    setAddedCount(addedCount + 1);
   };
 
   const onClickType = (id: number) => {
