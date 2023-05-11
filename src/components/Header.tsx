@@ -28,7 +28,7 @@ const Header = () => {
             <p>Not Medicine. It's Derma Cosmetics.</p>
           </div>
         </Link>
-        <Search />
+        {pathname !== '/bag' && <Search />}
         <div className="header__cart">
           {pathname !== '/bag' && (
             <Link to="/bag" className="button button--cart">
